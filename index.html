@@ -115,20 +115,14 @@ img.story-img {
 }
 
 /* ----------------------------------------------------------
-   CHARACTER GIF (IDLE + TRANSITIONS)
+   CHARACTER GIF (ONLY DURING TRANSITIONS)
 ----------------------------------------------------------- */
 #character {
   width: 130px;
   position: fixed;
   bottom: 20px;
-  left: 50%;
-  transform: translateX(-50%);
-  animation: idleBounce 3s infinite ease-in-out;
+  left: -200px;   /* hidden by default */
   z-index: 50;
-}
-@keyframes idleBounce {
-  0%,100% { transform: translate(-50%,0); }
-  50% { transform: translate(-50%,-6px); }
 }
 .walk { transition: left 4s linear; }
 
@@ -138,14 +132,14 @@ img.story-img {
   100% { transform: rotate(0deg); }
 }
 @keyframes sway {
-  0% { transform: translate(-50%,0); }
-  50% { transform: translate(-50%,6px); }
-  100% { transform: translate(-50%,0); }
+  0% { transform: translateX(0); }
+  50% { transform: translateX(6px); }
+  100% { transform: translateX(0); }
 }
 @keyframes hug {
-  0% { transform: translate(-50%,0) scale(1); }
-  50% { transform: translate(-50%,-4px) scale(1.08); }
-  100% { transform: translate(-50%,0) scale(1); }
+  0% { transform: scale(1); }
+  50% { transform: scale(1.08); }
+  100% { transform: scale(1); }
 }
 
 /* ----------------------------------------------------------
@@ -181,7 +175,7 @@ img.story-img {
 }
 
 /* ----------------------------------------------------------
-   SECRET LEVEL GATE (DARK MYSTERY MODE)
+   SECRET LEVEL GATE — DARK MYSTERY MODE
 ----------------------------------------------------------- */
 #secretGate {
   position: fixed;
@@ -198,7 +192,7 @@ img.story-img {
 
 .gate-card {
   width: 85%;
-  max-width: 500px;
+  max-width: 450px;
   padding: 20px;
   border: 4px solid #b14dff;
   background: rgba(30,0,60,0.9);
@@ -236,8 +230,8 @@ input.password {
 
 <body>
 
-<!-- CHARACTER -->
-<img id="character" src="images/pic6.gif">
+<!-- CHARACTER GIF (HIDDEN UNTIL TRANSITION) -->
+<img id="character" class="hidden" src="images/pic6.gif">
 
 <!-- FLOATING STARS + HEARTS -->
 <script>
@@ -289,9 +283,7 @@ function spawnRune() {
 <!-- PROGRESS BAR -->
 <div id="progressbar"><div id="progress"></div></div>
 
-<!-- ----------------------------------------------------------
-     LEVEL 1
------------------------------------------------------------ -->
+<!-- LEVEL 1 -->
 <div id="level1">
   <div class="card">
     <div class="level-title">LEVEL 1 — The Beginning</div>
@@ -305,9 +297,7 @@ function spawnRune() {
   <button class="btn" onclick="goToLevel(2)">Continue → Level 2</button>
 </div>
 
-<!-- ----------------------------------------------------------
-     LEVEL 2
------------------------------------------------------------ -->
+<!-- LEVEL 2 -->
 <div id="level2" class="hidden">
   <div class="card">
     <div class="level-title">LEVEL 2 — Sparks Grow</div>
@@ -321,9 +311,7 @@ function spawnRune() {
   <button class="btn" onclick="goToLevel(3)">Continue → Level 3</button>
 </div>
 
-<!-- ----------------------------------------------------------
-     LEVEL 3
------------------------------------------------------------ -->
+<!-- LEVEL 3 -->
 <div id="level3" class="hidden">
   <div class="card">
     <div class="level-title">LEVEL 3 — The Journey</div>
@@ -334,7 +322,6 @@ function spawnRune() {
     <div class="level-title">🎉 LEVEL 3 COMPLETED 🎉</div>
   </div>
 
-  <!-- SECRET LEVEL BUTTON -->
   <button class="btn" onclick="openSecretGate()"
           style="background:#b14dff; border-color:#ffea00;">
     Unlock Secret Level — BEST MEMORY
@@ -343,9 +330,7 @@ function spawnRune() {
   <button class="btn" onclick="restart()">Restart</button>
 </div>
 
-<!-- ----------------------------------------------------------
-     SECRET LEVEL — BEST MEMORY
------------------------------------------------------------ -->
+<!-- SECRET LEVEL -->
 <div id="secretLevel" class="hidden">
   <div class="card" style="border-color:#b14dff; box-shadow:0 0 20px #b14dff;">
     <div class="level-title" style="color:#b14dff; text-shadow:0 0 10px #b14dff;">
@@ -358,13 +343,16 @@ function spawnRune() {
   <button class="btn" onclick="restart()">Return to Start</button>
 </div>
 
-</div> <!-- container end -->
+</div> <!-- END CONTAINER -->
 
 <script>
 const character = document.getElementById("character");
 const loading = document.getElementById("loading");
 const progress = document.getElementById("progress");
 
+/* ----------------------------------------------------------
+   HEARTS + CONFETTI
+----------------------------------------------------------- */
 function playHearts() {
   for (let i = 0; i < 4; i++) {
     const h = document.createElement("div");
@@ -393,6 +381,10 @@ function confettiBurst() {
    LEVEL TRANSITIONS
 ----------------------------------------------------------- */
 function goToLevel(level) {
+
+  character.classList.remove("hidden");
+  character.style.left = "-200px"; // start off-screen
+
   /* LEVEL 1 → LEVEL 2 (Wave + Walk) */
   if (level === 2) {
     character.style.animation = "wave 1.2s ease";
@@ -411,13 +403,15 @@ function goToLevel(level) {
     character.style.left = "120vw";
   }
 
-  /* Loading Screen */
+  /* Show loading */
   setTimeout(() => loading.style.display = "flex", 1500);
 
+  /* Finish transition */
   setTimeout(() => {
     loading.style.display = "none";
-    character.style.left = "50%";
     character.classList.remove("walk");
+    character.style.left = "-200px"; // hide again
+    character.classList.add("hidden");
 
     if (level === 2) {
       level1.classList.add("hidden");
@@ -431,18 +425,24 @@ function goToLevel(level) {
       progress.style.width = "66%";
 
       setTimeout(() => {
+        character.classList.remove("hidden");
+        character.style.left = "50%";
         character.style.animation = "hug 1.5s ease";
         playHearts();
         confettiBurst();
+        setTimeout(() => {
+          character.classList.add("hidden");
+          character.style.left = "-200px";
+        }, 2000);
       }, 800);
     }
-    window.scrollTo(0,0);
 
+    window.scrollTo(0,0);
   }, 3800);
 }
 
 /* ----------------------------------------------------------
-   SECRET LEVEL LOGIC
+   SECRET LEVEL
 ----------------------------------------------------------- */
 function openSecretGate() {
   secretGate.style.display = "flex";
@@ -472,8 +472,10 @@ function restart() {
   secretLevel.classList.add("hidden");
   secretGate.style.display = "none";
   progress.style.width = "0%";
-  character.style.left = "50%";
-  character.style.animation = "idleBounce 3s infinite ease-in-out";
+
+  character.classList.add("hidden");
+  character.style.left = "-200px";
+
   window.scrollTo(0,0);
 }
 </script>
