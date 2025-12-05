@@ -4,17 +4,16 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>HAPPY RECAP — Pixel Adventure</title>
+  <title>UTJHA & SURBSUMA — Pixel Adventure</title>
 
   <style>
-    /* GLOBAL PIXEL GAME THEME */
     body {
       background: #1b1b2f;
-      color: #fff;
-      font-family: 'Courier New', monospace;
       margin: 0;
       padding: 0;
+      font-family: 'Courier New', monospace;
       overflow-x: hidden;
+      color: white;
       text-align: center;
     }
 
@@ -29,24 +28,23 @@
 
     h1 {
       font-size: 1.8rem;
-      margin-bottom: 15px;
-      color: #00d9ff;
-      text-shadow: 0px 0px 8px #00d9ff;
+      margin-bottom: 10px;
+      color: #00eaff;
+      text-shadow: 0 0 8px #00eaff;
     }
 
-    /* PIXEL CARD */
+    /* Pixel Card */
     .card {
       background: #162447;
-      border: 4px solid #00d9ff;
+      border: 4px solid #00eaff;
       border-radius: 8px;
       padding: 20px;
       margin-bottom: 25px;
-      box-shadow: 0px 0px 8px #00d9ff;
+      box-shadow: 0 0 10px #00eaff;
     }
 
     .level-title {
       color: #ffea00;
-      font-weight: bold;
       font-size: 1.1rem;
       margin-bottom: 10px;
       text-shadow: 0 0 6px #ffea00;
@@ -54,39 +52,31 @@
 
     img.story-img {
       width: 100%;
-      border: 3px solid #0ff;
+      border: 3px solid #00eaff;
       border-radius: 6px;
     }
 
-    /* PIXEL BUTTON */
+    /* Pixel Buttons */
     .btn {
-      font-family: inherit;
-      padding: 12px 25px;
-      font-size: 1rem;
-      background: #00d9ff;
-      color: #000;
+      background: #00eaff;
       border: 3px solid #ffea00;
       border-radius: 6px;
+      color: #000;
+      padding: 12px 24px;
+      font-size: 1rem;
       cursor: pointer;
-      transition: 0.2s;
+      text-shadow: 0 0 4px white;
       margin-top: 10px;
-      text-shadow: 0 0 5px #fff;
     }
 
-    .btn:hover {
-      background: #00a5c4;
-    }
+    .hidden { display: none; }
 
-    .hidden {
-      display: none;
-    }
-
-    /* PROGRESS BAR */
+    /* Progress Bar */
     #progressbar {
       width: 100%;
       height: 18px;
       background: #111;
-      border: 3px solid #00d9ff;
+      border: 3px solid #00eaff;
       border-radius: 6px;
       margin-bottom: 15px;
       overflow: hidden;
@@ -95,12 +85,12 @@
     #progress {
       width: 0%;
       height: 100%;
-      background: #00d9ff;
-      box-shadow: 0 0 12px #00d9ff;
+      background: #00eaff;
+      box-shadow: 0 0 12px #00eaff;
       transition: 0.5s;
     }
 
-    /* FLOATING HEARTS & STARS */
+    /* Floating pixel hearts & stars */
     .pixel {
       position: fixed;
       top: 110%;
@@ -112,86 +102,111 @@
     }
 
     @keyframes floatUp {
-      0% {
-        transform: translateY(0) scale(1);
-      }
-      100% {
-        transform: translateY(-120vh) scale(1.2);
-        opacity: 0;
-      }
+      0% { transform: translateY(0); }
+      100% { transform: translateY(-120vh); opacity: 0; }
     }
 
-    /* CHARACTER ANIMATION */
-    .character {
-      width: 140px;
-      height: auto;
+    /* Character (GIF) */
+    #character {
+      width: 130px;
       position: fixed;
-      bottom: 30px;
-      left: -200px;
-      z-index: 1000;
-      transition: 4s linear;
+      bottom: 20px;
+      left: 50%;
+      transform: translateX(-50%);
+      animation: idleBounce 3s infinite ease-in-out;
+      z-index: 50;
     }
 
-    /* LOADING SCREEN */
+    @keyframes idleBounce {
+      0%, 100% { transform: translate(-50%, 0); }
+      50% { transform: translate(-50%, -6px); }
+    }
+
+    /* Walk animation */
+    .walk {
+      transition: left 4s linear;
+    }
+
+    /* Wave animation */
+    @keyframes wave {
+      0% { transform: rotate(0deg); }
+      50% { transform: rotate(-10deg); }
+      100% { transform: rotate(0deg); }
+    }
+
+    /* Sway (hand-in-hand illusion) */
+    @keyframes sway {
+      0% { transform: translate(-50%,0); }
+      50% { transform: translate(-50%,6px); }
+      100% { transform: translate(-50%,0); }
+    }
+
+    /* Hug effect */
+    @keyframes hug {
+      0% { transform: scale(1) translate(-50%,0); }
+      50% { transform: scale(1.08) translate(-50%,-4px); }
+      100% { transform: scale(1) translate(-50%,0); }
+    }
+
+    /* Loading screen */
     #loading {
       position: fixed;
-      top: 0;
-      left: 0;
-      right: 0;
-      bottom: 0;
-      background: rgba(10, 10, 20, 0.95);
-      color: #00d9ff;
+      top: 0; left: 0; right: 0; bottom: 0;
       display: none;
       justify-content: center;
       align-items: center;
+      background: rgba(10,10,20,0.95);
       font-size: 1.4rem;
-      text-shadow: 0 0 10px #00d9ff;
+      color: #00eaff;
+      text-shadow: 0 0 10px #00eaff;
       z-index: 2000;
     }
 
-    /* LEVEL 3 COMPLETED */
-    .completed {
-      opacity: 0;
-      animation: fadeIn 4s forwards;
-      animation-delay: 2s;
+    /* Confetti */
+    .confetti {
+      position: fixed;
+      width: 8px;
+      height: 8px;
+      background: yellow;
+      animation: confettiFall 2s linear;
+      pointer-events: none;
     }
 
-    @keyframes fadeIn {
-      to { opacity: 1; }
+    @keyframes confettiFall {
+      0% { opacity: 1; transform: translateY(0) rotate(0deg); }
+      100% { opacity: 0; transform: translateY(80vh) rotate(360deg); }
     }
   </style>
+
 </head>
 
 <body>
 
-  <!-- FLOATING PARTICLES SCRIPT -->
   <script>
+    /* Floating stars & hearts */
     function spawnPixel() {
       const el = document.createElement("div");
       el.className = "pixel";
       el.innerHTML = Math.random() > 0.5 ? "★" : "❤";
       el.style.left = Math.random() * 100 + "vw";
-      el.style.color = Math.random() > 0.5 ? "#ff4dfc" : "#00d9ff";
+      el.style.color = Math.random() > 0.5 ? "#ff4dfc" : "#00eaff";
       document.body.appendChild(el);
       setTimeout(() => el.remove(), 6000);
     }
     setInterval(spawnPixel, 500);
   </script>
 
-  <!-- CHARACTER -->
-  <img id="character" class="character" src="images/pic6.png">
+  <!-- Character GIF -->
+  <img id="character" src="images/pic6.gif">
 
-  <!-- LOADING SCREEN -->
+  <!-- Loading screen -->
   <div id="loading">Entering next level…<br>Loading memories…</div>
 
   <div class="container">
-
     <h1>UTJHA & SURBSUMA — HAPPY RECAP</h1>
 
-    <!-- PROGRESS BAR -->
-    <div id="progressbar">
-      <div id="progress"></div>
-    </div>
+    <!-- Progress bar -->
+    <div id="progressbar"><div id="progress"></div></div>
 
     <!-- LEVEL 1 -->
     <div id="level1">
@@ -199,12 +214,11 @@
         <div class="level-title">LEVEL 1 — The Beginning</div>
         <img class="story-img" src="images/pic1.png">
       </div>
-
       <div class="card">
         <img class="story-img" src="images/pic2.png">
       </div>
 
-      <button class="btn" onclick="transitionTo(2)">Continue → Level 2</button>
+      <button class="btn" onclick="goToLevel(2)">Continue → Level 2</button>
     </div>
 
     <!-- LEVEL 2 -->
@@ -218,7 +232,7 @@
         <img class="story-img" src="images/pic4.png">
       </div>
 
-      <button class="btn" onclick="transitionTo(3)">Continue → Level 3</button>
+      <button class="btn" onclick="goToLevel(3)">Continue → Level 3</button>
     </div>
 
     <!-- LEVEL 3 -->
@@ -228,13 +242,12 @@
         <img class="story-img" src="images/pic5.png">
       </div>
 
-      <div class="card completed">
+      <div class="card">
         <div class="level-title">🎉 LEVEL 3 COMPLETED 🎉</div>
       </div>
 
       <button class="btn" onclick="restart()">Restart</button>
     </div>
-
   </div>
 
   <script>
@@ -242,45 +255,87 @@
     const loading = document.getElementById("loading");
     const progress = document.getElementById("progress");
 
-    function transitionTo(level) {
-      // Start character walking
-      character.style.left = "120vw";
+    function playHearts() {
+      for (let i = 0; i < 4; i++) {
+        const h = document.createElement("div");
+        h.className = "pixel";
+        h.innerHTML = "❤";
+        h.style.color = "#ff4dfc";
+        h.style.left = (50 + (Math.random() * 10 - 5)) + "vw";
+        document.body.appendChild(h);
+        setTimeout(() => h.remove(), 4000);
+      }
+    }
 
-      // Show loading screen quickly after walk starts
-      setTimeout(() => {
-        loading.style.display = "flex";
-      }, 1500);
+    function confettiBurst() {
+      for (let i = 0; i < 40; i++) {
+        const c = document.createElement("div");
+        c.className = "confetti";
+        c.style.left = (50 + (Math.random() * 40 - 20)) + "vw";
+        c.style.top = "40vh";
+        c.style.background = ["#ffea00", "#ff4dfc", "#00eaff"][Math.floor(Math.random() * 3)];
+        document.body.appendChild(c);
+        setTimeout(() => c.remove(), 2000);
+      }
+    }
 
-      // Finish transition
+    function goToLevel(level) {
+      /* LEVEL 1 → LEVEL 2 */
+      if (level === 2) {
+        character.style.animation = "wave 1.2s ease";
+        playHearts();
+        setTimeout(() => {
+          character.style.animation = "";
+          character.classList.add("walk");
+          character.style.left = "120vw";
+        }, 900);
+      }
+
+      /* LEVEL 2 → LEVEL 3 */
+      if (level === 3) {
+        character.style.animation = "sway 2s infinite ease-in-out";
+        character.classList.add("walk");
+        character.style.left = "120vw";
+      }
+
+      /* Show loading screen */
+      setTimeout(() => loading.style.display = "flex", 1500);
+
+      /* Finish transition */
       setTimeout(() => {
         loading.style.display = "none";
-        character.style.left = "-200px"; // reset
+        character.style.left = "50%";
+        character.classList.remove("walk");
 
         if (level === 2) {
-          document.getElementById("level1").classList.add("hidden");
-          document.getElementById("level2").classList.remove("hidden");
+          level1.classList.add("hidden");
+          level2.classList.remove("hidden");
           progress.style.width = "33%";
         }
 
         if (level === 3) {
-          document.getElementById("level2").classList.add("hidden");
-          document.getElementById("level3").classList.remove("hidden");
+          level2.classList.add("hidden");
+          level3.classList.remove("hidden");
           progress.style.width = "66%";
-        }
 
-        if (level === 99) {
-          progress.style.width = "100%";
+          setTimeout(() => {
+            character.style.animation = "hug 1.5s ease";
+            playHearts();
+            confettiBurst();
+          }, 800);
         }
 
         window.scrollTo(0, 0);
-      }, 3500);
+      }, 3800);
     }
 
     function restart() {
-      document.getElementById("level1").classList.remove("hidden");
-      document.getElementById("level2").classList.add("hidden");
-      document.getElementById("level3").classList.add("hidden");
+      level1.classList.remove("hidden");
+      level2.classList.add("hidden");
+      level3.classList.add("hidden");
       progress.style.width = "0%";
+      character.style.left = "50%";
+      character.style.animation = "idleBounce 3s infinite ease-in-out";
       window.scrollTo(0, 0);
     }
   </script>
