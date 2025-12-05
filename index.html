@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<title>SurbSuma & Utjha – RECAP </title>
+<title>SurbSuma & Utjha – Pixel Love Story</title>
 
 <!-- Pixel Font -->
 <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet">
@@ -120,7 +120,7 @@ body {
     line-height: 22px;
 }
 
-/* POPUP FOR LEVEL 3 CLEAR */
+/* LEVEL 3 CLEAR POPUP */
 #level3-popup {
     position: fixed;
     top: 40%;
@@ -147,14 +147,14 @@ body {
 
 <body>
 
-<!-- MUSIC -->
+<!-- BACKGROUND MUSIC (ONLINE) -->
 <audio id="bgm" loop>
   <source src="https://files.catbox.moe/3nz4xk.mp3" type="audio/mpeg" />
 </audio>
 
-<!-- LEVEL 3 CLEAR SOUND (Base64 embedded) -->
+<!-- LEVEL 3 CLEAR SOUND (embedded short chime) -->
 <audio id="level3-sound">
-  <source src="data:audio/mp3;base64,//uQxAAAAAAAAAAAAAAAAAAAA..." type="audio/mp3">
+  <source src="data:audio/mp3;base64,SUQzAwAAAAA..." type="audio/mp3">
 </audio>
 
 <!-- FLOATING HEARTS -->
@@ -173,72 +173,69 @@ setInterval(createHeart, 800);
 
 <div class="wrapper">
 
-    <!-- TITLE SCREEN -->
-    <div class="title-screen" id="title-screen">
-        <h1>🌸 SurbSuma <span class="pixel-heart">❤</span> Utjha 🌸<br> A Pixel Love Story</h1>
-        <button class="btn-start" onclick="startStory();">▶ START STORY</button>
+<div class="title-screen" id="title-screen">
+    <h1>🌸 SurbSuma <span class="pixel-heart">❤</span> Utjha 🌸<br>A Pixel Love Story</h1>
+    <button class="btn-start" onclick="startStory();">▶ START STORY</button>
+</div>
+
+<div id="level3-popup">🌸 LEVEL 3 CLEAR! 🌸</div>
+
+<div id="story-section">
+
+    <!-- LEVEL 1 -->
+    <div class="scene">
+        <div class="scene-title">Level 1 — Campus Destiny (23 Dec 2019)</div>
+        <img class="pixel-img" src="https://i.imgur.com/jzT0tHZ.png" />
+        <div class="dialogue">They met… different colleges, same destiny. 🌸</div>
     </div>
 
-    <!-- POPUP -->
-    <div id="level3-popup">🌸 LEVEL 3 CLEAR! 🌸</div>
-
-    <!-- STORY SECTION -->
-    <div id="story-section">
-
-        <!-- LEVEL 1 -->
-        <div class="scene">
-            <div class="scene-title">Level 1 — Campus Destiny (23 Dec 2019)</div>
-            <img class="pixel-img" src="https://i.imgur.com/jzT0tHZ.png" />
-            <div class="dialogue">They met… different colleges, same destiny. 🌸</div>
-        </div>
-
-        <!-- LEVEL 2 -->
-        <div class="scene">
-            <div class="scene-title">Level 2 — Dumb Charades Magic</div>
-            <img class="pixel-img" src="https://i.imgur.com/UcUQc3a.png" />
-            <div class="dialogue">Raanjhanaa guessed instantly. Spark unlocked! 🎬✨</div>
-        </div>
-
-        <!-- LEVEL 3 -->
-        <div class="scene" id="level3">
-            <div class="scene-title">Level 3 — Online Talks</div>
-            <img class="pixel-img" src="https://i.imgur.com/lgC3Wbm.png" />
-            <div class="dialogue">Calls… jokes… feelings loading 99%. 💌</div>
-        </div>
-
-        <!-- LEVEL 4 (NEW COUPLE ART) -->
-        <div class="scene">
-            <div class="scene-title">Level 4 — Hero Moment</div>
-            <img class="pixel-img" src="https://i.imgur.com/0KyqNtn.png" />
-            <div class="dialogue">Utjha.exe: Fake BF mode ON. SurbSuma protected. ❤️</div>
-        </div>
-
-        <!-- LEVEL 5 (NEW TRAVEL SCENERY) -->
-        <div class="scene">
-            <div class="scene-title">Level 5 — Delhi ↔ Bengaluru</div>
-            <img class="pixel-img" src="https://i.imgur.com/eTg4nN8.png" />
-            <div class="dialogue">Long distance… long calls… hope rising. ☎️💞</div>
-        </div>
-
-        <!-- LEVEL 6 (NEW COUPLE ART) -->
-        <div class="scene">
-            <div class="scene-title">Level 6 — 7 Dec 2022</div>
-            <img class="pixel-img" src="https://i.imgur.com/fkhlHAV.png" />
-            <div class="dialogue">Shy smiles… warm hearts… official love unlocked! 💞</div>
-        </div>
-
-        <!-- LEVEL 7 (NEW TRAVEL SCENE) -->
-        <div class="scene">
-            <div class="scene-title">Level 7 — Adventures</div>
-            <img class="pixel-img" src="https://i.imgur.com/aoyrCpt.png" />
-            <div class="dialogue">Vietnam, Kashmir, Kerala… Love XP +999 ✨</div>
-        </div>
-
-        <!-- ENDING -->
-        <div class="end-screen">
-            <h2>🌸 HAPPY 3 YEARS 🌸<br>Lots of hearts for you both ❤❤❤❤❤</h2>
-        </div>
+    <!-- LEVEL 2 -->
+    <div class="scene">
+        <div class="scene-title">Level 2 — Dumb Charades Magic</div>
+        <img class="pixel-img" src="https://i.imgur.com/UcUQc3a.png" />
+        <div class="dialogue">Raanjhanaa guessed instantly. Spark unlocked! 🎬✨</div>
     </div>
+
+    <!-- LEVEL 3 -->
+    <div class="scene" id="level3">
+        <div class="scene-title">Level 3 — Online Talks</div>
+        <img class="pixel-img" src="https://i.imgur.com/lgC3Wbm.png" />
+        <div class="dialogue">Calls… jokes… feelings loading 99%. 💌</div>
+    </div>
+
+    <!-- LEVEL 4 — NEW COUPLE ART -->
+    <div class="scene">
+        <div class="scene-title">Level 4 — Hero Moment</div>
+        <img class="pixel-img" src="https://i.imgur.com/0KyqNtn.png" />
+        <div class="dialogue">Utjha.exe: Fake BF mode ON. SurbSuma protected. ❤️</div>
+    </div>
+
+    <!-- LEVEL 5 — NEW TRAVEL ART -->
+    <div class="scene">
+        <div class="scene-title">Level 5 — Delhi ↔ Bengaluru</div>
+        <img class="pixel-img" src="https://i.imgur.com/eTg4nN8.png" />
+        <div class="dialogue">Long distance… long calls… hope rising. ☎️💞</div>
+    </div>
+
+    <!-- LEVEL 6 — NEW COUPLE ART -->
+    <div class="scene">
+        <div class="scene-title">Level 6 — 7 Dec 2022</div>
+        <img class="pixel-img" src="https://i.imgur.com/fkhlHAV.png" />
+        <div class="dialogue">Shy smiles… warm hearts… official love unlocked! 💞</div>
+    </div>
+
+    <!-- LEVEL 7 — NEW TRAVEL ART -->
+    <div class="scene">
+        <div class="scene-title">Level 7 — Adventures</div>
+        <img class="pixel-img" src="https://i.imgur.com/aoyrCpt.png" />
+        <div class="dialogue">Vietnam, Kashmir, Kerala… Love XP +999 ✨</div>
+    </div>
+
+    <div class="end-screen">
+        <h2>🌸 HAPPY 3 YEARS 🌸<br>Lots of hearts for you both ❤❤❤❤❤</h2>
+    </div>
+</div>
+
 </div>
 
 <script>
@@ -248,22 +245,19 @@ function startStory() {
     document.getElementById("bgm").play();
 }
 
-/* LEVEL 3 CLEAR POPUP TRIGGER */
+/* LEVEL 3 CLEAR POPUP */
 const level3 = document.getElementById("level3");
 const popup = document.getElementById("level3-popup");
 const sound = document.getElementById("level3-sound");
-
 let shown = false;
+
 const observer = new IntersectionObserver(entries => {
     entries.forEach(entry => {
         if (!shown && !entry.isIntersecting) {
             shown = true;
             popup.style.display = "block";
             sound.play();
-            createHeart();
-            createHeart();
-            createHeart();
-
+            createHeart(); createHeart(); createHeart();
             setTimeout(() => popup.style.display = "none", 2000);
         }
     });
